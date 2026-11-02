@@ -142,6 +142,11 @@ p { margin: 0; }
 .sp__ph { position: relative; width: min(100%, 176px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: linear-gradient(150deg, var(--ink-2), var(--ink)); margin-bottom: 10px; box-shadow: 0 0 0 4px #fff, 0 0 0 5px var(--line); }
 .sp__ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .sp__ph svg { position: absolute; left: 50%; bottom: 0; width: 70%; transform: translateX(-50%); color: rgba(255,255,255,.16); }
+.faces { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin: 8px 0 44px; }
+.faces img { flex: 0 0 calc((100% - 84px) / 7); min-width: 0; aspect-ratio: 1; object-fit: cover; border-radius: 18px; background: var(--paper); box-shadow: 0 1px 0 var(--line); transition: transform .25s; }
+.faces img:hover { transform: translateY(-3px); }
+@media (max-width: 900px) { .faces img { flex-basis: calc((100% - 56px) / 5); } }
+@media (max-width: 600px) { .faces { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; gap: 10px; margin: 4px -16px 36px; padding: 0 16px 6px; scrollbar-width: none; } .faces::-webkit-scrollbar { display: none; } .faces img { flex: 0 0 112px; border-radius: 14px; scroll-snap-align: start; } }
 .sp__ini { position: absolute; inset: 0; display: grid; place-items: center; font: 600 clamp(1.6rem, 4vw, 2.3rem)/1 var(--f-display); letter-spacing: .04em; color: rgba(255,255,255,.9); } /* shown until a photo is added (or if it fails to load) */
 .sp__tag { font: 600 .64rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--red); padding: 4px 10px; border-radius: 999px; }
 .sp b { font: 600 1.14rem/1.25 var(--f-display); letter-spacing: -.01em; }
@@ -409,6 +414,7 @@ details p { color: var(--text-2); padding-bottom: 20px; max-width: 64ch; }
       <h2>Outstanding speakers</h2>
       <p>Established academic leaders, rising faculty and experts in research commercialization. Names are added as speakers confirm.</p>
     </div>
+    <div class="faces" id="faces"></div>
   </div>
   <div class="inst">
     <div class="wrap inst__head"><h3>Our speakers come from</h3><span>Hover to pause</span></div>
@@ -608,6 +614,23 @@ const PARTNERS = [
 
 // Forum start (Almaty time, UTC+5), used for the countdown
 const START = "2026-12-25T09:30:00+05:00";
+// Photo strip at the top of the Speakers section (files next to index.html). Remove a line to hide that photo.
+const SPEAKER_PHOTOS = [
+  "speaker-01.jpg",
+  "speaker-02.jpg",
+  "speaker-03.jpg",
+  "speaker-04.jpg",
+  "speaker-05.jpg",
+  "speaker-06.jpg",
+  "speaker-07.jpg",
+  "speaker-08.jpg",
+  "speaker-09.jpg",
+  "speaker-10.jpg",
+  "speaker-11.jpg",
+  "speaker-12.jpg",
+  "speaker-13.jpg"
+];
+
 // Forum end (Almaty time, UTC+5)
 const END = "2026-12-25T17:00:00+05:00";
 
@@ -694,6 +717,10 @@ const ORGANIZERS = [
       <b>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name)}</b>
       <span class="sp__role">${esc(s.role || "")}${s.org ? "<br>" + esc(s.org) : ""}</span>
     </article>`;
+  /* photo strip of invited speakers (SPEAKER_PHOTOS); hidden when empty */
+  if (typeof SPEAKER_PHOTOS !== "undefined" && SPEAKER_PHOTOS.length)
+    $("faces").innerHTML = SPEAKER_PHOTOS.map(src => `<img src="${esc(src)}" alt="Invited speaker" loading="lazy" onerror="this.remove()">`).join("");
+  else $("faces").remove();
   $("spGroups").innerHTML = SPEAKER_GROUPS.map(g => {
     const list = SPEAKERS.filter(s => s.group === g.id);
     if (!list.length) return "";
