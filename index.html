@@ -142,6 +142,7 @@ p { margin: 0; }
 .sp__ph { position: relative; width: min(100%, 176px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: linear-gradient(150deg, var(--ink-2), var(--ink)); margin-bottom: 10px; box-shadow: 0 0 0 4px #fff, 0 0 0 5px var(--line); }
 .sp__ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .sp__ph svg { position: absolute; left: 50%; bottom: 0; width: 70%; transform: translateX(-50%); color: rgba(255,255,255,.16); }
+.sp__ini { position: absolute; inset: 0; display: grid; place-items: center; font: 600 clamp(1.6rem, 4vw, 2.3rem)/1 var(--f-display); letter-spacing: .04em; color: rgba(255,255,255,.9); } /* shown until a photo is added (or if it fails to load) */
 .sp__tag { font: 600 .64rem var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--red); padding: 4px 10px; border-radius: 999px; }
 .sp b { font: 600 1.14rem/1.25 var(--f-display); letter-spacing: -.01em; }
 .sp b a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); }
@@ -209,7 +210,7 @@ p { margin: 0; }
 
 /* venue */
 .venue { position: relative; min-height: 620px; display: flex; align-items: flex-end; background: var(--ink); }
-.venue__img { position: absolute; inset: 0; background: url("assets/campus.jpg") center 70% / cover no-repeat, linear-gradient(160deg, #1d3f94, var(--ink)); }
+.venue__img { position: absolute; inset: 0; background: url("campus.jpg") center 70% / cover no-repeat, linear-gradient(160deg, #1d3f94, var(--ink)); }
 .venue__img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(10,22,51,.94) 0%, rgba(10,22,51,.4) 55%, rgba(10,22,51,.12) 100%); }
 .venue .wrap { position: relative; width: 100%; padding-block: 72px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; color: var(--text-inv); }
 .venue h2 { color: var(--white); }
@@ -457,8 +458,8 @@ details p { color: var(--text-2); padding-bottom: 20px; max-width: 64ch; }
   <div class="wrap">
     <div class="head"><span class="label">Partners</span><h2>Organizers &amp; partners</h2></div>
     <div class="tiers">
-      <div class="tier tier--dark"><div><small>Organized by</small><strong>QIST Association</strong></div><img src="assets/qist-logo.png" alt="QIST, Qazaq International Science &amp; Technology Association" data-fb="QIST" onerror="imgFallback(this)"></div>
-      <div class="tier"><div><small>Hosted by</small><strong>Narxoz University</strong></div><img src="assets/partners/narxoz.png" alt="Narxoz University" style="height:48px" onerror="imgFallback(this)"></div>
+      <div class="tier tier--dark"><div><small>Organized by</small><strong>QIST Association</strong></div><img src="qist-logo.png" alt="QIST, Qazaq International Science &amp; Technology Association" data-fb="QIST" onerror="imgFallback(this)"></div>
+      <div class="tier"><div><small>Hosted by</small><strong>Narxoz University</strong></div><img src="narxoz.png" alt="Narxoz University" style="height:48px" onerror="imgFallback(this)"></div>
     </div>
   </div>
   <div class="belt"><div class="belt__track" id="beltP1"></div></div>
@@ -519,7 +520,7 @@ details p { color: var(--text-2); padding-bottom: 20px; max-width: 64ch; }
 
 <footer class="foot">
   <div class="wrap">
-    <a href="#top" class="foot__logo"><img src="assets/qist-logo.png" alt="QIST, Qazaq International Science &amp; Technology Association" data-fb="QIST" onerror="imgFallback(this)"></a>
+    <a href="#top" class="foot__logo"><img src="qist-logo.png" alt="QIST, Qazaq International Science &amp; Technology Association" data-fb="QIST" onerror="imgFallback(this)"></a>
     <p>Contact: <span class="mono">info@QISTA.org</span> · <a href="https://qista.org" target="_blank" rel="noopener">qista.org ↗</a></p>
   </div>
 </footer>
@@ -538,28 +539,28 @@ const SPEAKER_GROUPS = [
 ];
 
 // One line per speaker slot. Fill in name, role, org and photo when a speaker confirms.
-// Put photos in assets/speakers/. Optional: url (link to a profile page; makes the name clickable). An empty name shows "To be announced". Add or delete lines to change the number of slots.
+// Put photos next to index.html and write the file name in photo. Optional: url (link to a profile page; makes the name clickable). An empty name shows "To be announced". Add or delete lines to change the number of slots.
 const SPEAKERS = [
-  { group: "senior",  name: "", role: "", org: "", photo: "", tag: "Keynote" },
-  { group: "senior",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "senior",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "senior",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "senior",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "senior",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "rising",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "rising",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "rising",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "rising",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "rising",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "rising",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "rising",  name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "innov",   name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "innov",   name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "innov",   name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "innov",   name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "leaders", name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "leaders", name: "", role: "", org: "", photo: "", tag: "" },
-  { group: "leaders", name: "", role: "", org: "", photo: "", tag: "" }
+  { group: "senior", name: "Dana Minbaeva", role: "Professor of Strategic Human Capital", org: "King's Business School, King's College London", photo: "", tag: "", url: "https://www.kcl.ac.uk/people/dana-minbaeva" },
+  { group: "senior", name: "Maral Muratbekova-Touron", role: "Full Professor of Work, Organisations and Human Relations", org: "ESCP Business School, Paris", photo: "", tag: "", url: "https://escp.eu/muratbekova-touron-maral" },
+  { group: "senior", name: "Aliya Kuzhabekova", role: "Associate Professor, Werklund School of Education", org: "University of Calgary", photo: "", tag: "", url: "https://profiles.ucalgary.ca/aliya-kuzhabekova" },
+  { group: "senior", name: "Arkhat Abzhanov", role: "Associate Professor, Evolution and Developmental Genetics", org: "Imperial College London", photo: "", tag: "", url: "https://profiles.imperial.ac.uk/a.abzhanov" },
+  { group: "senior", name: "", role: "", org: "", photo: "", tag: "", url: "" },
+  { group: "senior", name: "", role: "", org: "", photo: "", tag: "", url: "" },
+  { group: "rising", name: "Nari Shelekpayev", role: "Assistant Professor of Slavic Languages and Literatures", org: "Yale University", photo: "", tag: "", url: "https://macmillan.yale.edu/reees/person/nari-shelekpayev" },
+  { group: "rising", name: "Karlygash Kuralbayeva", role: "Senior Lecturer in Economics", org: "King's College London", photo: "", tag: "", url: "https://www.kcl.ac.uk/people/karlygash-kuralbayeva" },
+  { group: "rising", name: "Serik Tokbolat", role: "Assistant Professor, Sustainable Construction Engineering", org: "University of Nottingham", photo: "", tag: "", url: "https://www.nottingham.ac.uk/research/groups/buildings-energy-and-environment/people/serik.tokbolat" },
+  { group: "rising", name: "Assel Mussagulova", role: "Lecturer in Public Policy and Public Administration", org: "University of Sydney", photo: "", tag: "", url: "https://profiles.sydney.edu.au/assel.mussagulova" },
+  { group: "rising", name: "Mansur Khamitov", role: "Assistant Professor of Marketing", org: "Kelley School of Business, Indiana University", photo: "", tag: "", url: "https://kelley.iu.edu/faculty-research/faculty-directory/profile.html?id=mkhamito" },
+  { group: "rising", name: "Yerkin Kitapbayev", role: "Assistant Professor of Mathematics", org: "Khalifa University", photo: "", tag: "", url: "https://www.ku.ac.ae/college-people/yerkin-kitapbayev" },
+  { group: "rising", name: "", role: "", org: "", photo: "", tag: "", url: "" },
+  { group: "innov", name: "Aliya Sembayeva", role: "Industry R&D", org: "", photo: "", tag: "", url: "" },
+  { group: "innov", name: "", role: "", org: "", photo: "", tag: "", url: "" },
+  { group: "innov", name: "", role: "", org: "", photo: "", tag: "", url: "" },
+  { group: "innov", name: "", role: "", org: "", photo: "", tag: "", url: "" },
+  { group: "leaders", name: "Yelena Kalyuzhnova", role: "Vice Dean (International), Director of the Centre for Euro-Asian Studies", org: "Henley Business School, University of Reading", photo: "", tag: "", url: "https://www.henley.ac.uk/people/professor-yelena-kalyuzhnova" },
+  { group: "leaders", name: "Nargis Kassenova", role: "Senior Fellow and Director, Program on Central Asia", org: "Davis Center, Harvard University", photo: "", tag: "", url: "https://www.gov.harvard.edu/directory/nargis-kassenova-2" },
+  { group: "leaders", name: "Zhandos Utegulov", role: "Department of Physics", org: "Nazarbayev University", photo: "", tag: "", url: "" }
 ];
 
 // Program: [time, session, details, type]; type "talk" = bold title, "" = plain row
@@ -580,29 +581,29 @@ const AGENDA = [
 
 // Institutions our speakers come from: [name, logo]
 const INSTITUTIONS = [
-  ["Yale University", "assets/institutions/yale.png"],
-  ["MIT Kuo Sharper Center for Prosperity and Entrepreneurship", "assets/institutions/mit-kuo-sharper.png"],
-  ["Charité Universitätsmedizin Berlin", "assets/institutions/charite.png"],
-  ["King's College London", "assets/institutions/kings-college.png"],
-  ["Waseda University", "assets/institutions/waseda.png"],
-  ["Chinese Academy of Sciences", "assets/institutions/cas.png"],
-  ["Ritsumeikan Asia Pacific University", "assets/institutions/apu.png"],
-  ["Roche", "assets/institutions/roche.png"],
-  ["Yale Ventures", "assets/institutions/yale-ventures.png"],
-  ["Nazarbayev University", "assets/institutions/nazarbayev.png"],
-  ["SDU University", "assets/institutions/sdu.png"],
-  ["Khan Tengri Innovation Hub", "assets/institutions/khan-tengri.png"]
+  ["Yale University", "yale.png"],
+  ["MIT Kuo Sharper Center for Prosperity and Entrepreneurship", "mit-kuo-sharper.png"],
+  ["Charité Universitätsmedizin Berlin", "charite.png"],
+  ["King's College London", "kings-college.png"],
+  ["Waseda University", "waseda.png"],
+  ["Chinese Academy of Sciences", "cas.png"],
+  ["Ritsumeikan Asia Pacific University", "apu.png"],
+  ["Roche", "roche.png"],
+  ["Yale Ventures", "yale-ventures.png"],
+  ["Nazarbayev University", "nazarbayev.png"],
+  ["SDU University", "sdu.png"],
+  ["Khan Tengri Innovation Hub", "khan-tengri.png"]
 ];
 
 // Partners: [name, logo]
 const PARTNERS = [
-  ["Ministry of Science and Higher Education of Kazakhstan", "assets/partners/ministry.png"],
-  ["Astana Hub", "assets/partners/astana-hub.png"],
-  ["Bolashak", "assets/partners/bolashak.png"],
-  ["Narxoz University", "assets/partners/narxoz.png"],
-  ["KIMEP University", "assets/partners/kimep.png"],
-  ["Galym Project", "assets/partners/galym.png"],
-  ["Silkroad Innovation Hub", "assets/partners/silkroad.png"]
+  ["Ministry of Science and Higher Education of Kazakhstan", "ministry.png"],
+  ["Astana Hub", "astana-hub.png"],
+  ["Bolashak", "bolashak.png"],
+  ["Narxoz University", "narxoz.png"],
+  ["KIMEP University", "kimep.png"],
+  ["Galym Project", "galym.png"],
+  ["Silkroad Innovation Hub", "silkroad.png"]
 ];
 
 // Forum start (Almaty time, UTC+5), used for the countdown
@@ -685,9 +686,10 @@ const ORGANIZERS = [
 
   /* people: confirmed speakers get a circular headshot card; unconfirmed slots collapse into one tile per group */
   const sil = '<svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><circle cx="50" cy="36" r="20"/><path d="M8 100c0-25 19-42 42-42s42 17 42 42z"/></svg>';
+  const initials = n => { const w = String(n).trim().split(/\s+/); return ((w[0] || "")[0] || "") + (w.length > 1 ? w[w.length - 1][0] : ""); };
   const card = s => `
     <article class="sp">
-      <div class="sp__ph">${sil}${s.photo ? `<img src="${esc(s.photo)}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()">` : ""}</div>
+      <div class="sp__ph"><span class="sp__ini" aria-hidden="true">${esc(initials(s.name).toUpperCase())}</span>${s.photo ? `<img src="${esc(s.photo)}" alt="${esc(s.name)}" loading="lazy" onerror="this.remove()">` : ""}</div>
       ${s.tag ? `<span class="sp__tag">${esc(s.tag)}</span>` : ""}
       <b>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name)}</b>
       <span class="sp__role">${esc(s.role || "")}${s.org ? "<br>" + esc(s.org) : ""}</span>
